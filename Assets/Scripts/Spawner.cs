@@ -14,19 +14,12 @@ public class Spawner : MonoBehaviour
     private void Awake()
     {
         _pool = new ObjectPool<GameObject>(
-        // createFunc определяет что нужно сделать при создании нового объекта _pool
         createFunc: () => Instantiate(_prefab),
-        // actionOnGet определяет действие при взятии свободного объекта из пула
         actionOnGet: (obj) => ActionOnGet(obj),
-        // actionOnRelease определяет действие при возвращении объекта в пул
         actionOnRelease: (obj) => obj.SetActive(false),
-        // actionOnDestroy определяет действие при удалении объекта из пула 
         actionOnDestroy: (obj) => Destroy(obj),
-        // collectionCheck определяет надо ли проверять коллекцию при возвращении объекта в пул - работает только в редакторе
         collectionCheck: true,
-        // defaultCapacity определяет размер пула по умолчанию
         defaultCapacity: _poolCapacity,
-        // maxSize определяет максимальный размер пула
         maxSize: _poolMaxSize);
     }
 
